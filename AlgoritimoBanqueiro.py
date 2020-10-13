@@ -2,13 +2,6 @@ recursos_disponiveis = []
 matriz_requisicoes = []
 alocacao_corrente = []
 
-def recursos_disponiveis_valores(matriz):
-    recurso = []
-    for i in matriz:
-        recurso.append(i[1])
-
-    return recurso
-
 def atual_alocacao_processo(processo):
     #retonar uma lista com a alocação corrente do processo ex "return processo = [1, 0, 1, 0]"
     return alocacao_corrente[processo]
@@ -62,38 +55,45 @@ def algoritmo_do_banqueiro(conjunto_de_processos, recursos_livres):
     return 'SEGURO'
 
 def main():
-    recursos_disponiveis_matriz = []
+    recursos_existentes_matriz = []
     while(True):
         print("Infome o tipo do recurso: ")
         recurso = input("\nnome: ")
         print("Infome a quantidade do recurso: ")
         quantidade = int(input("\nquantidade: "))
-        recursos_disponiveis_matriz.append([recurso, quantidade])
+        recursos_existentes_matriz.append([recurso, quantidade])
         segue = input("\nDigite '0' se deseja encerrar a escolha de recursos, se não Enter >>> ")
         if (segue == '0'):
             break
+    
+    print("\n---------Infome a quantidade de recursos disponiveis---------- ")
+    quantidade = []
+    for d in range(len(recursos_existentes_matriz)):
+        print("\nInfome a quantidade de recurso disponivel de {}".format(recursos_existentes_matriz[d][0]))
+        quant = int(input("quantidade: "))
+        quantidade.append(quant)
+    recursos_disponiveis = quantidade
 
     print("\n---------Infome a quantidade de processo---------- ")
     count_proc = int(input("quantidade: "))
     for i in range(count_proc):
         quantidade = []
-        for j in range(len(recursos_disponiveis_matriz)):
+        for j in range(len(recursos_existentes_matriz)):
             print("\n---------Infome as requisicoes de recurso do P{}--------- ".format(i+1))
-            print("\nInfome a quantidade de recurso de {}".format(recursos_disponiveis_matriz[j][0]))
+            print("\nInfome a quantidade de recurso de {}".format(recursos_existentes_matriz[j][0]))
             quant = int(input("quantidade: "))
             quantidade.append(quant)
         matriz_requisicoes.append(quantidade)
 
     for m in range(count_proc):
         quantidade = []
-        for n in range(len(recursos_disponiveis_matriz)):
+        for n in range(len(recursos_existentes_matriz)):
             print("\n---------Infome a alocacao correte do processo P{}--------- ".format(m+1))
-            print("\nInfome a quantidade de recurso de {}".format(recursos_disponiveis_matriz[n][0]))
+            print("\nInfome a quantidade de recurso de {}".format(recursos_existentes_matriz[n][0]))
             quant = int(input("\nquantidade: "))
             quantidade.append(quant)
         alocacao_corrente.append(quantidade)
     
-    recursos_disponiveis = recursos_disponiveis_valores(recursos_disponiveis_matriz)
     resultado = algoritmo_do_banqueiro(matriz_requisicoes, recursos_disponiveis)
 
     print(resultado)
