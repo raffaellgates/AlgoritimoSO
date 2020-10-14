@@ -1,3 +1,3 @@
 Feito em dupla
 
-Rafael Araujo e André Rabelo
+Rafael da Silva Araújo & André Rabelo de Souza
